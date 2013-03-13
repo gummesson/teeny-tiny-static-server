@@ -10,10 +10,11 @@
 
 ## Configuration
 
-The default folder used for the static files is `static` and the default port is `9292`. This can easily by changed be editing the following in the file:
+The default folder used for the static files is `site`, the default port is `9292` and the log is set to `false`. This can easily be changed by editing the following at the top of the file:
 
-     DIR = "static"
-    PORT = "9292"
+     DIR = "site"
+    PORT = 9292
+     LOG = false
 
 ## Requirements
 

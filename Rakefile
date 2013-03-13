@@ -8,19 +8,13 @@ require 'rack-rewrite'
 require 'thin'
 
 # Static files directory
-DIR = "static"
+DIR = "site"
 
 # Port number
-PORT = "9292"
+PORT = 9292
 
-# Check OS (for the "open" task)
-def darwin?
-  RbConfig::CONFIG["host_os"] =~ /darwin/i
-end
-
-def windows?
-  RbConfig::CONFIG["host_os"] =~ /mswin|mingw|windows/i
-end
+# Use CommonLogger, ShowStatus and ShowExceptions
+LOG = false
 
 # Set "rake server" as default
 task :default => :server
@@ -29,6 +23,11 @@ task :default => :server
 desc "Start the server"
 task :server do
   site = Rack::Builder.new do 
+    if LOG == true
+      use Rack::CommonLogger
+      use Rack::ShowStatus
+      use Rack::ShowExceptions
+    end
     use Rack::Rewrite do
       rewrite "/", "/index.html"
     end
@@ -41,6 +40,15 @@ end
 # rake serve (alias for "server" task)
 task :serve do
   Rake::Task[:server].invoke
+end
+
+# Check OS (for the "open" task)
+def windows?
+  RbConfig::CONFIG["host_os"] =~ /mswin|mingw|windows/i
+end
+
+def darwin?
+  RbConfig::CONFIG["host_os"] =~ /darwin/i
 end
 
 # rake open
