@@ -18,6 +18,7 @@ The default folder used for the static files is `site`, the default port is `929
 
 ## Requirements
 
+- [Rake](https://github.com/jimweirich/rake "Rake")
 - [Rack](https://github.com/chneukirchen/rack "Rack")
 - [Rack-Rewrite](https://github.com/jtrupiano/rack-rewrite "Rack-Rewrite")
 - [Thin](https://github.com/macournoyer/thin "Thin")
