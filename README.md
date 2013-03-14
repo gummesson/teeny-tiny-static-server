@@ -1,6 +1,6 @@
 # README
 
-*Teeny Tiny Static Server* is a small Rakefile for serving static files with [Rack](https://github.com/chneukirchen/rack "Rack"), [Rack-Rewrite](https://github.com/jtrupiano/rack-rewrite "Rack-Rewrite") and [Thin](https://github.com/macournoyer/thin "Thin").
+*Teeny Tiny Static Server* is a small Rakefile for serving static files with [Rack](https://github.com/chneukirchen/rack "Rack"), [Rack-Rewrite](https://github.com/jtrupiano/rack-rewrite "Rack-Rewrite") and [Thin](https://github.com/macournoyer/thin "Thin") locally.
 
 ## Usage
 
