@@ -13,8 +13,11 @@ DIR = "site"
 # Port number
 PORT = 9292
 
-# Use CommonLogger, ShowStatus and ShowExceptions
+# Use Rack::CommonLogger, Rack::ShowStatus and Rack::ShowExceptions
 LOG = false
+
+# Serve assets via Rack::Static
+ASSETS = true
 
 # Set "rake server" as default
 task :default => :server
@@ -27,6 +30,9 @@ task :server do
       use Rack::CommonLogger
       use Rack::ShowStatus
       use Rack::ShowExceptions
+    end
+    if ASSETS == true
+      use Rack::Static, :root => "assets", :urls => ["/css", "/images", "/js"]
     end
     use Rack::Rewrite do
       rewrite "/", "/index.html"
@@ -51,21 +57,28 @@ def darwin?
   RbConfig::CONFIG["host_os"] =~ /darwin/i
 end
 
+# Check which command to use (for the "open" task)
+def command
+  if windows?
+    "start"
+  elsif darwin?
+    "open"
+  else
+    "xdg-open"
+  end
+end
+
 # rake open
 desc "Open the default port in a web browser"
 task :open do
-  if windows?
-    system "start http://localhost:#{PORT}/"
-  elsif darwin?
-    system "open http://localhost:#{PORT}/"
-  else
-    system "xdg-open http://localhost:#{PORT}/"
-  end
+  system "#{command} http://localhost:#{PORT}/"
 end
 
 # rake launch (may require a browser refresh)
 desc "Open the default port in a web browser and start the server"
 task :launch do
+  puts "Launching browser..."
+  sleep 1
   Rake::Task[:open].invoke
   Rake::Task[:server].invoke
 end
