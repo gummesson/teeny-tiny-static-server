@@ -13,7 +13,7 @@ DIR = "site"
 # Port number
 PORT = 9292
 
-# Use Rack::CommonLogger, Rack::ShowStatus and Rack::ShowExceptions
+# Use Rack::CommonLogger, Rack::ShowStatus and Rack::ShowExceptions?
 LOG = false
 
 # Serve assets via Rack::Static
